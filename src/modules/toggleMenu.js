@@ -47,6 +47,7 @@ const toggleMenu = () => {
             target.closest('a').getAttribute('href')[0] === '#'
         ) {
             menuScrollTo.bind(e)(target.closest('a'));
+            popupMenu.style.transform = '';
         }
     });
 };

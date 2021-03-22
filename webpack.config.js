@@ -7,10 +7,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const mode = process.env.NODE_ENV;
 
 const isDev = mode === 'development';
+const isTest = process.env.TEST_ENV;
 
-const generateFilename = ext => isDev ?
+const generateFilename = ext => (isDev || isTest ?
     `[name].${ext}` :
-    `[name].[contenthash].${ext}`;
+    `[name].[contenthash].${ext}`);
+// `[name].${ext}`);
 
 module.exports = {
     entry: {
@@ -113,4 +115,4 @@ module.exports = {
         historyApiFallback: true
     },
     devtool: isDev && 'source-map'
-}
+};

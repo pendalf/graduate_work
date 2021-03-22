@@ -16,7 +16,8 @@ import togglePopup from './modules/togglePopup';
 
     // Popups
     togglePopup([
-        ['.link-list-menu a, .link-list-repair a', '.popup-repair-types']
+        ['.link-list-menu a, .link-list-repair a', '.popup-repair-types'],
+        ['.link-privacy', '.popup-privacy']
     ]);
 
 })();

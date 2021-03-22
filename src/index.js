@@ -5,6 +5,7 @@ import './index.html';
 import phoneList from './modules/phoneList';
 import toggleMenu from './modules/toggleMenu';
 import togglePopup from './modules/togglePopup';
+import accordeon from './modules/accordeon';
 
 'use strict';
 (() => {
@@ -20,5 +21,8 @@ import togglePopup from './modules/togglePopup';
         ['.link-privacy', '.popup-privacy'],
         ['.director button', '.popup-consultation']
     ]);
+
+    // accordeon
+    accordeon();
 
 })();

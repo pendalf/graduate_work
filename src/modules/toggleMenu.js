@@ -34,7 +34,6 @@ const toggleMenu = () => {
 
     document.addEventListener('click', e => {
         const target = e.target;
-        console.log(target);
         if (target.closest('.close-menu') || !target.closest('.popup-menu')) {
             popupMenu.style.transform = '';
         }

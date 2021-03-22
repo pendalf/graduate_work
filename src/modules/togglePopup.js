@@ -70,7 +70,8 @@ const togglePopup = els => {
             const target = e.target;
             if (
                 (target.closest('.close') || !target.closest('.popup-dialog')) &&
-                !target.closest('.popup-dialog-menu')
+                !target.closest('.popup-dialog-menu') &&
+                target.closest('.popup')
             ) {
                 fadeOut(target.closest('.popup'));
             }

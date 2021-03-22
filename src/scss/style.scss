@@ -1,4 +1,20 @@
-// $main-color: #f0f;
-// h1 {
-//     color: $main-color;
-// }
+.header-contacts {
+    .header-contacts__arrow {
+        img {
+            transition: 0.5s;
+        }
+    }
+    &.openned {
+        .header-contacts__arrow {
+            img {
+                transform: rotate(180deg);
+            }
+        }
+        .header-contacts__phone-number-accord {
+            top: 30px;
+            a {
+                opacity: 1;
+            }
+        }
+    }
+}

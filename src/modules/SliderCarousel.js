@@ -20,6 +20,7 @@ class SliderCarousel {
         }
         this.slider = document.querySelector(slider);
         this.main = document.querySelector(main);
+        this.isWrap = !!wrap;
         this.wrap = document.querySelector(wrap) || document.createElement('div');
         this.next = this.slider.querySelector(next);
         this.prev = this.slider.querySelector(prev);
@@ -34,14 +35,14 @@ class SliderCarousel {
         if (!this.wrap.children.length) {
             this.wrap.append(...this.main.children);
         }
-        this.slides = this.wrap.children;
+        this.slides = new Set([...this.wrap.children]);
         this.slidesToShow = slidesToShow;
         this.options = {
             position,
             infinity,
             disable,
             widthSlide: this.slideWidth(),
-            maxPosition: this.slides.length - this.slidesToShow
+            maxPosition: this.slides.size - this.slidesToShow
         };
         this.responsive = responsive;
         this.afterChange = afterChange;
@@ -79,6 +80,9 @@ class SliderCarousel {
         if (!this.main.querySelector('.glo-slider__wrap')) {
             this.main.append(this.wrap);
         }
+        if (!this.isWrap) {
+            this.wrap.append(...this.slides);
+        }
         [...this.slides].forEach(el => el.classList.add('glo-slider__item', `glo-slider__item--${this.key}`));
     }
 
@@ -86,6 +90,12 @@ class SliderCarousel {
         this.main.classList.remove('glo-slider');
         this.wrap.classList.remove('glo-slider__wrap');
         [...this.slides].forEach(el => el.classList.remove('glo-slider__item', `glo-slider__item--${this.key}`));
+
+        if (!this.isWrap) {
+            this.wrap.textContent = '';
+            this.main.textContent = '';
+            this.main.append(...this.slides);
+        }
 
         this.next.classList.remove('show-arrow', 'hide-arrow');
         this.prev.classList.remove('show-arrow', 'hide-arrow');
@@ -178,7 +188,7 @@ class SliderCarousel {
     }
 
     nextSlider() {
-        if (this.options.infinity || this.options.position < this.slides.length - this.slidesToShow) {
+        if (this.options.infinity || this.options.position < this.slides.size - this.slidesToShow) {
             ++this.options.position;
 
             if (this.options.position > this.options.maxPosition) {
@@ -259,7 +269,7 @@ class SliderCarousel {
                         this.slidesToShow = this.responsive[i].slidesToShow;
                         this.options.disable = !!this.responsive[i].disable;
                         this.options.widthSlide = this.slideWidth();
-                        this.options.maxPosition = this.slides.length - this.slidesToShow;
+                        this.options.maxPosition = this.slides.size - this.slidesToShow;
                         if (!this.options.disable) {
                             this.addGloClass();
                             this.addStyle();
@@ -273,7 +283,7 @@ class SliderCarousel {
                 this.slidesToShow = slidesToShowDefault;
                 this.options.disable = disableDefault;
                 this.options.widthSlide = this.slideWidth();
-                this.options.maxPosition = this.slides.length - this.slidesToShow;
+                this.options.maxPosition = this.slides.size - this.slidesToShow;
                 if (!this.options.disable) {
                     this.addGloClass();
                     this.addStyle();

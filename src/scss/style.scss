@@ -69,3 +69,18 @@
         opacity: 1;
     }
 }
+
+.transparency-slider-wrap {
+    .slider-arrow {
+        transition: 0.2s all;
+        opacity: 1;
+    }
+    .show-arrow {
+        display: flex !important;
+        opacity: 1;
+    }
+    .hide-arrow {
+        display: flex !important;
+        opacity: 0;
+    }
+}

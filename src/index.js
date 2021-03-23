@@ -21,7 +21,7 @@ import portfolio from './modules/portfolio';
     togglePopup([
         ['.link-list-menu a, .link-list-repair a', '.popup-repair-types'],
         ['.link-privacy', '.popup-privacy'],
-        ['.director button', '.popup-consultation']
+        ['.director button, .services button', '.popup-consultation']
     ]);
 
     // accordeon

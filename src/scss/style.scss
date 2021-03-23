@@ -18,3 +18,54 @@
         }
     }
 }
+
+.portfolio-slider-wrap {
+    .slider-arrow {
+        transition: 0.2s all;
+        opacity: 1;
+    }
+    .show-arrow {
+        display: flex !important;
+        opacity: 1;
+    }
+    .hide-arrow {
+        display: flex !important;
+        opacity: 0;
+    }
+}
+
+@media (max-width: 900px) {
+    .portfolio-slider {
+        max-width: 352px;
+    }
+}
+
+.popup-portfolio-slider-wrap {
+    .popup-arrow {
+        transition: 0.2s all;
+        opacity: 1;
+    }
+    .show-arrow {
+        display: block !important;
+        opacity: 1;
+    }
+    .hide-arrow {
+        display: block !important;
+        opacity: 0;
+    }
+}
+
+.popup-portfolio-slider__slide {
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+.popup-portfolio-text {
+    transition: 0.2s all;
+    opacity: 0;
+    &--show {
+        opacity: 1;
+    }
+}

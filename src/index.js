@@ -6,6 +6,8 @@ import phoneList from './modules/phoneList';
 import toggleMenu from './modules/toggleMenu';
 import togglePopup from './modules/togglePopup';
 import accordeon from './modules/accordeon';
+import portfolio from './modules/portfolio';
+
 
 'use strict';
 (() => {
@@ -24,5 +26,8 @@ import accordeon from './modules/accordeon';
 
     // accordeon
     accordeon();
+
+    // portfolio
+    portfolio();
 
 })();

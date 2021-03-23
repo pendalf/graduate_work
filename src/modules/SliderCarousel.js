@@ -156,6 +156,7 @@ class SliderCarousel {
             .glo-slider__item--${this.key} {
                 flex: 0 0 ${this.options.widthSlide}% !important;
                 width: ${this.options.widthSlide}% !important;
+                max-width: ${this.options.widthSlide}% !important;
             }
         `;
 

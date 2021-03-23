@@ -46,5 +46,36 @@ import SliderCarousel from './modules/SliderCarousel';
     });
     reviewsSlider.init();
 
+    // partners
+    const partnersSlider = new SliderCarousel({
+        slider: '.partners',
+        main: '.partners-slider',
+        prev: '.slider-arrow_left',
+        next: '.slider-arrow_right',
+        infinity: true,
+        slidesToShow: 3,
+        responsive: [
+
+            {
+                breakpoint: 1091,
+                slidesToShow: 2,
+            },
+            {
+                breakpoint: 1025,
+                slidesToShow: 3,
+            },
+            {
+                breakpoint: 641,
+                slidesToShow: 2,
+            },
+            {
+                breakpoint: 576,
+                slidesToShow: 1,
+            }
+        ]
+    });
+    partnersSlider.init();
+
+
 
 })();

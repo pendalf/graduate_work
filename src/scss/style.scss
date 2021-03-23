@@ -19,21 +19,6 @@
     }
 }
 
-.portfolio-slider-wrap {
-    .slider-arrow {
-        transition: 0.2s all;
-        opacity: 1;
-    }
-    .show-arrow {
-        display: flex !important;
-        opacity: 1;
-    }
-    .hide-arrow {
-        display: flex !important;
-        opacity: 0;
-    }
-}
-
 @media (max-width: 900px) {
     .portfolio-slider {
         max-width: 352px;
@@ -68,16 +53,14 @@
     }
 }
 
-.transparency-slider-wrap {
-    .slider-arrow {
-        transition: 0.2s all;
-        opacity: 1;
-    }
-    .show-arrow {
+.slider-arrow {
+    transition: 0.2s all;
+    opacity: 1;
+    & .show-arrow {
         display: flex !important;
         opacity: 1;
     }
-    .hide-arrow {
+    &.hide-arrow {
         display: flex !important;
         opacity: 0;
     }

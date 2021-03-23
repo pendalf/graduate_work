@@ -8,7 +8,7 @@ import togglePopup from './modules/togglePopup';
 import accordeon from './modules/accordeon';
 import portfolio from './modules/portfolio';
 import documents from './modules/documents';
-// import SliderCarousel from './modules/SliderCarousel';
+import SliderCarousel from './modules/SliderCarousel';
 
 
 'use strict';
@@ -34,5 +34,17 @@ import documents from './modules/documents';
 
     // documents slider on mobile
     documents();
+
+    // reviews
+    const reviewsSlider = new SliderCarousel({
+        slider: '.reviews-slider-wrap',
+        main: '.reviews-slider',
+        prev: '.slider-arrow_left',
+        next: '.slider-arrow_right',
+        infinity: false,
+        slidesToShow: 1,
+    });
+    reviewsSlider.init();
+
 
 })();

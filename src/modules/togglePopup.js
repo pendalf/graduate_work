@@ -69,7 +69,12 @@ const togglePopup = els => {
         document.addEventListener('click', e => {
             const target = e.target;
             if (
-                (target.closest('.close') || !target.closest('.popup-dialog')) &&
+                (
+                    target.closest('.close') ||
+                    (!target.closest('.popup-dialog') &&
+                        !target.closest('.popup-dialog-transparency')
+                    )
+                ) &&
                 !target.closest('.popup-dialog-menu') &&
                 target.closest('.popup')
             ) {

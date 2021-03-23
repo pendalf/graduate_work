@@ -40,16 +40,14 @@
     }
 }
 
-.popup-portfolio-slider-wrap {
-    .popup-arrow {
-        transition: 0.2s all;
-        opacity: 1;
-    }
-    .show-arrow {
+.popup-arrow {
+    transition: 0.2s all;
+    opacity: 1;
+    &.show-arrow {
         display: block !important;
         opacity: 1;
     }
-    .hide-arrow {
+    &.hide-arrow {
         display: block !important;
         opacity: 0;
     }

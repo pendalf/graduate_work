@@ -18,6 +18,7 @@ class SliderCarousel {
         if (!main || !slider) {
             console.warn('slider-carouser: Необходимо 2 свойства: "slider", "main"');
         }
+        this.options = {};
         this.slider = document.querySelector(slider);
         this.main = document.querySelector(main);
         this.isWrap = !!wrap;
@@ -53,6 +54,20 @@ class SliderCarousel {
         return SliderCarousel._counter;
     }
 
+
+    currentPos(pos) {
+        this.options.position = pos;
+
+        if (this.options.position > this.options.maxPosition) {
+            this.options.position = 0;
+        }
+        if (this.options.position < 0) {
+            this.options.position = this.options.maxPosition;
+        }
+        this.goToposition();
+
+    }
+
     init() {
 
         this.addGloClass();
@@ -69,6 +84,8 @@ class SliderCarousel {
         }
         this.showArrows();
     }
+
+
 
     generateKey() {
         return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -189,25 +206,19 @@ class SliderCarousel {
 
     nextSlider() {
         if (this.options.infinity || this.options.position < this.slides.size - this.slidesToShow) {
-            ++this.options.position;
-
-            if (this.options.position > this.options.maxPosition) {
-                this.options.position = 0;
-            }
-            this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
+            this.currentPos(++this.options.position);
         }
-        this.showArrows();
     }
 
     prevSlider() {
         if (this.options.infinity || this.options.position > 0) {
 
-            --this.options.position;
-            if (this.options.position < 0) {
-                this.options.position = this.options.maxPosition;
-            }
-            this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
+            this.currentPos(--this.options.position);
         }
+    }
+
+    goToposition() {
+        this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
         this.showArrows();
     }
 

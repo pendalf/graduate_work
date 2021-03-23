@@ -7,7 +7,8 @@ import toggleMenu from './modules/toggleMenu';
 import togglePopup from './modules/togglePopup';
 import accordeon from './modules/accordeon';
 import portfolio from './modules/portfolio';
-import SliderCarousel from './modules/SliderCarousel';
+import documents from './modules/documents';
+// import SliderCarousel from './modules/SliderCarousel';
 
 
 'use strict';
@@ -31,21 +32,7 @@ import SliderCarousel from './modules/SliderCarousel';
     // portfolio
     portfolio();
 
-    // documents slider on mobile_left
-    const documentsSlider = new SliderCarousel({
-        slider: '.transparency-slider-wrap',
-        main: '.transparency-slider',
-        prev: '.slider-arrow_left',
-        next: '.slider-arrow_right',
-        infinity: false,
-        slidesToShow: 1,
-        disable: true,
-        responsive: [{
-            breakpoint: 1090,
-            slidesToShow: 1,
-
-        }]
-    });
-    documentsSlider.init();
+    // documents slider on mobile
+    documents();
 
 })();

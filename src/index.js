@@ -12,6 +12,7 @@ import SliderCarousel from './modules/SliderCarousel';
 import Formula from './modules/Formula';
 import repairTypes from './modules/repairTypes';
 import designSolutions from './modules/designSolutions';
+import scheme from './modules/scheme';
 
 
 'use strict';
@@ -166,5 +167,8 @@ import designSolutions from './modules/designSolutions';
 
     // design solutions
     designSolutions();
+
+    // scheme
+    scheme();
 
 })();

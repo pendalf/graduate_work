@@ -61,7 +61,13 @@ const repairTypes = () => {
         infinity: false,
         dynamicWidth: true,
         display: 'inline-flex',
-        slidesToShow: 1
+        disable: true,
+        slidesToShow: 1,
+        responsive: [{
+            breakpoint: 1025,
+            dynamicWidth: true,
+            slidesToShow: 1,
+        }]
     });
     tabsSlider.init();
 

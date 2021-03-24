@@ -122,4 +122,41 @@ import Formula from './modules/Formula';
     });
     formulaSlider.init();
 
+    // problems
+    const problems = new Formula({
+        main: '.problems',
+        item: '.problems-item',
+        icon: '.problems-item__icon',
+        popup: '.problems-item-popup'
+    });
+    problems.init();
+
+    // problems mobile
+    const problemsMobile = new Formula({
+        main: '.problems-slider-wrap',
+        item: '.problems-item',
+        icon: '.problems-item',
+        popup: '.problems-item-popup'
+    });
+    problemsMobile.init();
+
+    // problems slider
+    const problemsSlider = new SliderCarousel({
+        slider: '.problems-slider-wrap',
+        main: '.problems-slider',
+        prev: '.slider-arrow_left',
+        next: '.slider-arrow_right',
+        infinity: true,
+        disable: true,
+        slidesToShow: 1,
+        responsive: [
+
+            {
+                breakpoint: 1025,
+                slidesToShow: 1,
+            }
+        ]
+    });
+    problemsSlider.init();
+
 })();

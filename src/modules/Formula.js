@@ -1,5 +1,3 @@
-import SliderCarousel from './SliderCarousel';
-
 class Formula {
     constructor({
         main,
@@ -19,6 +17,7 @@ class Formula {
         this.itemSelector = item;
         this.popupSelector = popup;
         this.activeClass = activeClass;
+        this.throttled = false;
     }
 
     static get count() {
@@ -30,18 +29,14 @@ class Formula {
         this.handlers();
     }
 
-    scrollHeight() {
-        return Math.max(
-            document.body.scrollHeight, document.documentElement.scrollHeight,
-            document.body.offsetHeight, document.documentElement.offsetHeight,
-            document.body.clientHeight, document.documentElement.clientHeight
-        );
-    }
-
     getFit(el) {
         const rect = el.getBoundingClientRect(),
             windowHeight = document.documentElement.clientHeight;
         return rect.top < 0 ? 'bottom' : rect.bottom > windowHeight ? 'top' : null;
+    }
+
+    convertTime(time) {
+        return parseFloat(time) * 1000;
     }
 
     mouseenterHandler(e) {
@@ -63,12 +58,27 @@ class Formula {
     mouseleaveHandler(e) {
         const target = e.target;
         if (!(target instanceof HTMLDocument) && target.closest(this.iconSelector)) {
-            target.closest(this.itemSelector).classList.remove(this.activeClass, 'top', 'bottom');
+            const el = target.closest(this.itemSelector),
+                styles = getComputedStyle(el),
+                time = this.convertTime(styles.transitionDuration);
+            el.classList.remove(this.activeClass);
+            setTimeout(() => {
+                target.closest(this.itemSelector).classList.remove('top', 'bottom');
+            }, time);
         }
     }
 
     handlers() {
-        this.main.addEventListener('mouseenter', this.mouseenterHandler.bind(this), true);
+
+        this.main.addEventListener('mouseenter', e => {
+            if (!this.throttled) {
+                this.throttled = true;
+                this.mouseenterHandler(e);
+                setTimeout(() => {
+                    this.throttled = false;
+                }, 20);
+            }
+        }, true);
         this.main.addEventListener('mouseleave', this.mouseleaveHandler.bind(this), true);
     }
 }

@@ -88,3 +88,17 @@
         margin-top: -119px;
     }
 }
+
+.problems-slider {
+    padding-top: 380px;
+    margin-top: -380px;
+    height: 954px;
+}
+
+@media (max-width: 575px) {
+    .problems-slider {
+        padding-top: 171px;
+        min-height: 436px;
+        margin-top: -119px;
+    }
+}

@@ -34,6 +34,7 @@ const toggleMenu = () => {
 
     document.addEventListener('click', e => {
         const target = e.target;
+        const targetA = target.closest('a');
         if (target.closest('.close-menu') || !target.closest('.popup-menu')) {
             popupMenu.style.transform = '';
         }
@@ -41,9 +42,10 @@ const toggleMenu = () => {
             actionMenu();
         }
         if (
-            target.closest('a') &&
-            target.closest('a').getAttribute('href').length > 1 &&
-            target.closest('a').getAttribute('href')[0] === '#'
+            targetA &&
+            targetA.getAttribute('href') &&
+            targetA.getAttribute('href').length > 1 &&
+            targetA.getAttribute('href')[0] === '#'
         ) {
             menuScrollTo.bind(e)(target.closest('a'));
             popupMenu.style.transform = '';

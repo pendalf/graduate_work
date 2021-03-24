@@ -1,24 +1,34 @@
+const tabContentArray = selector => {
+    const tabsSelectors = typeof selector === 'string' ? selector.split(',').map(i => i.trim()) : selector;
+    return tabsSelectors.map(i => document.querySelectorAll(i));
+};
+
 const tabs = ({
     tabHeaderSelector,
     tabSelector,
     tabContentSelector,
     activeTabClass = 'active',
-    hideTabClass = 'd-none'
+    hideTabClass = 'd-none',
+    showTabClass = 'visible'
 
 }) => {
     const tabHeader = document.querySelector(tabHeaderSelector),
         tab = tabHeader.querySelectorAll(tabSelector),
-        tabContent = document.querySelectorAll(tabContentSelector);
+        tabContent = tabContentArray(tabContentSelector);
 
     const toggleTabContent = index => {
-        tabContent.forEach((element, i) => {
-            if (i === index) {
-                tab[i].classList.add(activeTabClass);
-                element.classList.remove(hideTabClass);
-            } else {
-                element.classList.add(hideTabClass);
-                tab[i].classList.remove(activeTabClass);
-            }
+        tabContent.forEach(nodeCollection => {
+            nodeCollection.forEach((element, i) => {
+                if (i === index) {
+                    tab[i].classList.add(activeTabClass);
+                    element.classList.remove(hideTabClass);
+                    element.classList.add(showTabClass);
+                } else {
+                    element.classList.add(hideTabClass);
+                    element.classList.remove(showTabClass);
+                    tab[i].classList.remove(activeTabClass);
+                }
+            });
         });
     };
 

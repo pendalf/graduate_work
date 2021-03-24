@@ -11,6 +11,7 @@ import documents from './modules/documents';
 import SliderCarousel from './modules/SliderCarousel';
 import Formula from './modules/Formula';
 import repairTypes from './modules/repairTypes';
+import designSolutions from './modules/designSolutions';
 
 
 'use strict';
@@ -162,5 +163,8 @@ import repairTypes from './modules/repairTypes';
 
     // repair types
     repairTypes();
+
+    // design solutions
+    designSolutions();
 
 })();

@@ -102,3 +102,19 @@
         margin-top: -119px;
     }
 }
+
+.d-none {
+    display: none;
+}
+
+.nav-list {
+    .glo-slider__wrap {
+        justify-content: space-between;
+        &>* {
+            margin-right: 15px;
+        }
+    }
+    &.nav-list-repair {
+        min-width: 0;
+    }
+}

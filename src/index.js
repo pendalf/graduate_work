@@ -10,6 +10,7 @@ import portfolio from './modules/portfolio';
 import documents from './modules/documents';
 import SliderCarousel from './modules/SliderCarousel';
 import Formula from './modules/Formula';
+import repairTypes from './modules/repairTypes';
 
 
 'use strict';
@@ -158,5 +159,8 @@ import Formula from './modules/Formula';
         ]
     });
     problemsSlider.init();
+
+    // repair types
+    repairTypes();
 
 })();

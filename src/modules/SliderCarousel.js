@@ -12,6 +12,8 @@ class SliderCarousel {
         current = false,
         total = false,
         disable = false,
+        dynamicWidth = false,
+        display = 'flex',
         afterChange = () => {},
         responsive = []
     }) {
@@ -19,9 +21,9 @@ class SliderCarousel {
             console.warn('slider-carouser: Необходимо 2 свойства: "slider", "main"');
         }
         this.slider = document.querySelector(slider);
-        this.main = document.querySelector(main);
+        this.main = this.slider.querySelector(main);
         this.isWrap = !!wrap;
-        this.wrap = document.querySelector(wrap) || document.createElement('div');
+        this.wrap = this.slider.querySelector(wrap) || document.createElement('div');
         this.next = this.slider.querySelector(next);
         this.prev = this.slider.querySelector(prev);
 
@@ -41,11 +43,14 @@ class SliderCarousel {
             position,
             infinity,
             disable,
+            display,
+            dynamicWidth,
             widthSlide: this.slideWidth(),
             maxPosition: this.slides.size - this.slidesToShow
         };
         this.responsive = responsive;
         this.afterChange = afterChange;
+        this.dynamicMaxPosition = 0;
     }
 
     static get count() {
@@ -92,7 +97,7 @@ class SliderCarousel {
 
     addGloClass() {
         this.main.classList.add('glo-slider');
-        this.wrap.classList.add('glo-slider__wrap');
+        this.wrap.classList.add('glo-slider__wrap', `glo-slider__wrap--${this.key}`);
         if (!this.main.querySelector('.glo-slider__wrap')) {
             this.main.append(this.wrap);
         }
@@ -135,15 +140,14 @@ class SliderCarousel {
                 display: block !important;
             }
             .glo-slider__wrap {
-                display: flex !important;
+                /*display: flex !important;*/
                 transition: transform 0.5s !important;
                 will-change: transform !important;
             }
             .glo-slider__item {
-                display: flex !important;
                 align-items: center !important;
                 /*flex: 0 0 ${this.options.widthSlide}% !important;*/
-                margin: auto 0 !important;
+                /*margin: auto 0 !important;*/
                 justify-content: center !important;
                 /*flex-basis: ${this.options.widthSlide}% !important;*/
                 /*flex: 0 0 ${this.options.widthSlide}% !important;*/
@@ -151,15 +155,23 @@ class SliderCarousel {
             }
         `;
         document.head.append(style);
-        styleOwn.textContent = `        
+        // if (!this.options.dynamicWidth) {
+        const nonDynamicWidth = `
+            flex: 0 0 ${this.options.widthSlide}% !important;
+            width: ${this.options.widthSlide}% !important;
+            max-width: ${this.options.widthSlide}% !important;
+        `;
+        styleOwn.textContent = `
+            .glo-slider__wrap--${this.key} {
+                display: ${this.options.display} !important;
+            }
             .glo-slider__item--${this.key} {
-                flex: 0 0 ${this.options.widthSlide}% !important;
-                width: ${this.options.widthSlide}% !important;
-                max-width: ${this.options.widthSlide}% !important;
+                ${!this.options.dynamicWidth ? nonDynamicWidth : ''}                
             }
         `;
 
         document.head.append(styleOwn);
+        // }
     }
 
     controlSlider() {
@@ -217,8 +229,39 @@ class SliderCarousel {
         }
     }
 
+    getCoords(el) {
+        return el.getBoundingClientRect();
+    }
+
+    getDynamicTransform() {
+        const wrapCoords = this.getCoords(this.wrap),
+            mainCoords = this.getCoords(this.main),
+            currentItem = [...this.slides][this.options.position],
+            currentCoords = this.getCoords(currentItem),
+            mainWidth = wrapCoords.width;
+        let newPosition = wrapCoords.left - currentCoords.left;
+
+        if (wrapCoords.right === mainCoords.right && this.options.position > this.dynamicMaxPosition) {
+            this.options.position = this.dynamicMaxPosition;
+        }
+
+        if (wrapCoords.width + newPosition < mainCoords.width) {
+            newPosition = mainCoords.width - wrapCoords.width;
+            this.dynamicMaxPosition = this.options.position;
+        }
+
+        const transform = (newPosition) / mainWidth * 100;
+        return transform;
+    }
+
     goToposition() {
-        this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
+        let transform;
+        if (this.options.dynamicWidth) {
+            transform = this.getDynamicTransform();
+        } else {
+            transform = -this.options.position * this.options.widthSlide;
+        }
+        this.wrap.style.transform = `translateX(${transform}%)`;
         this.showArrows();
     }
 
@@ -269,6 +312,8 @@ class SliderCarousel {
     responseInit() {
         const slidesToShowDefault = this.slidesToShow;
         const disableDefault = this.options.disable;
+        const displayDefault = this.options.display;
+        const dynamicWidthDefault = this.options.dynamicWidth;
         const allResponse = this.responsive.map(i => i.breakpoint);
         const maxResponse = Math.max(...allResponse);
 
@@ -293,6 +338,8 @@ class SliderCarousel {
             } else {
                 this.slidesToShow = slidesToShowDefault;
                 this.options.disable = disableDefault;
+                this.options.display = displayDefault;
+                this.options.dynamicWidth = dynamicWidthDefault;
                 this.options.widthSlide = this.slideWidth();
                 this.options.maxPosition = this.slides.size - this.slidesToShow;
                 if (!this.options.disable) {

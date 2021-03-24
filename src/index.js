@@ -9,6 +9,7 @@ import accordeon from './modules/accordeon';
 import portfolio from './modules/portfolio';
 import documents from './modules/documents';
 import SliderCarousel from './modules/SliderCarousel';
+import Formula from './modules/Formula';
 
 
 'use strict';
@@ -76,6 +77,49 @@ import SliderCarousel from './modules/SliderCarousel';
     });
     partnersSlider.init();
 
+    // formula
+    const formula = new Formula({
+        main: '.formula',
+        item: '.formula-item',
+        icon: '.formula-item__icon',
+        popup: '.formula-item-popup'
+    });
+    formula.init();
 
+    // formula mobile
+    const formulaMobile = new Formula({
+        main: '.formula-slider-wrap',
+        item: '.formula-item',
+        icon: '.formula-item',
+        popup: '.formula-item-popup'
+    });
+    formulaMobile.init();
+
+    // formula slider
+    const formulaSlider = new SliderCarousel({
+        slider: '.formula-slider-wrap',
+        main: '.formula-slider',
+        prev: '.slider-arrow_left',
+        next: '.slider-arrow_right',
+        infinity: true,
+        disable: true,
+        slidesToShow: 3,
+        responsive: [
+
+            {
+                breakpoint: 1025,
+                slidesToShow: 3,
+            },
+            {
+                breakpoint: 769,
+                slidesToShow: 2,
+            },
+            {
+                breakpoint: 641,
+                slidesToShow: 1,
+            }
+        ]
+    });
+    formulaSlider.init();
 
 })();

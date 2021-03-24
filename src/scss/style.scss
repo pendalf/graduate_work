@@ -74,3 +74,17 @@
         }
     }
 }
+
+.formula-slider {
+    padding-top: 292px;
+    margin-top: -190px;
+    min-height: 692px;
+}
+
+@media (max-width: 575px) {
+    .formula-slider {
+        padding-top: 171px;
+        min-height: 436px;
+        margin-top: -119px;
+    }
+}

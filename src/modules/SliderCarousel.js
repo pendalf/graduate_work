@@ -18,7 +18,6 @@ class SliderCarousel {
         if (!main || !slider) {
             console.warn('slider-carouser: Необходимо 2 свойства: "slider", "main"');
         }
-        this.options = {};
         this.slider = document.querySelector(slider);
         this.main = document.querySelector(main);
         this.isWrap = !!wrap;

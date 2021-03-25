@@ -18,6 +18,7 @@ import scheme from './modules/scheme';
 import sendForm from './modules/sendForm';
 import maskPhone from './modules/maskPhone';
 import PriceList from './modules/PriceList';
+import validationForms from './modules/validationForms';
 
 
 'use strict';
@@ -176,6 +177,9 @@ import PriceList from './modules/PriceList';
     // scheme
     scheme();
 
+    //form input validation
+    validationForms();
+
     // send-ajax-form
     maskPhone('.feedback-block__form-input_phone');
     maskPhone('.feedback__form .feedback__input-input');
@@ -202,10 +206,12 @@ import PriceList from './modules/PriceList';
         sendForm(i, {
             pattern: {
                 phone: /^\+7 \(\d\d\d\) \d\d\d-\d\d-\d\d$/,
+                name: /^[а-яё ]{2,}$/gi
             },
             method: {
                 '.feedback-block__form-input_name': [
-                    ['notEmpty']
+                    ['notEmpty'],
+                    ['pattern', 'name']
                 ],
                 '.feedback-block__form-input_phone': [
                     ['notEmpty'],
@@ -225,5 +231,6 @@ import PriceList from './modules/PriceList';
         tabsContent: '.popup-repair-types-content'
     });
     priceList.init();
+
 
 })();

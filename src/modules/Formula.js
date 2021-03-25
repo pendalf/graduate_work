@@ -41,7 +41,6 @@ class Formula {
 
     mouseenterHandler(e) {
         const target = e.target;
-        console.log(target);
         if (!(target instanceof HTMLDocument) && target.closest(this.iconSelector)) {
             const el = target.closest(this.itemSelector),
                 popup = el.querySelector(this.popupSelector),

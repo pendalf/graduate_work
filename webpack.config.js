@@ -16,7 +16,10 @@ const generateFilename = ext => (isDev || isTest ?
 
 module.exports = {
     entry: {
-        main: './index.js'
+        main: ['core-js', './index.js'],
+        polyfills: [
+            'core-js'
+        ]
     },
     output: {
         filename: `./js/${generateFilename('js')}`,

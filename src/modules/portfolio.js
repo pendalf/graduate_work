@@ -75,8 +75,6 @@ const portfolio = () => {
                     time = convertTime(styles.transitionDuration),
                     position = getOffset(el);
 
-                console.log(styles);
-
                 el.style.position = 'absolute';
                 el.style.top = (position.top - parseFloat(styles.marginTop)) + 'px';
                 el.style.right = position.right + 'px';

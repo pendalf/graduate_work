@@ -15,6 +15,7 @@ import designSolutions from './modules/designSolutions';
 import scheme from './modules/scheme';
 import sendForm from './modules/sendForm';
 import maskPhone from './modules/maskPhone';
+import PriceList from './modules/PriceList';
 
 
 'use strict';
@@ -214,6 +215,13 @@ import maskPhone from './modules/maskPhone';
             }
         });
     });
-    //
+
+    // priceList
+    const priceList = new PriceList({
+        main: '.popup-dialog-repair-types',
+        tabsHeader: '.nav-list-popup-repair',
+        tabsContent: '.popup-repair-types-content'
+    });
+    priceList.init();
 
 })();

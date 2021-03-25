@@ -39,10 +39,17 @@ module.exports = {
             filename: `./css/${generateFilename('css')}`
         }),
         new CopyWebpackPlugin({
-            patterns: [{
-                from: 'images',
-                to: 'images'
-            }]
+            patterns: [
+
+                {
+                    from: 'db',
+                    to: 'db'
+                },
+                {
+                    from: 'images',
+                    to: 'images'
+                }
+            ]
         })
     ],
     module: {
@@ -54,7 +61,15 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env']
+                        presets: ['@babel/preset-env'],
+                        plugins: [
+                            [
+                                '@babel/plugin-proposal-class-properties',
+                                {
+                                    'loose': true
+                                }
+                            ]
+                        ]
                     }
                 }
             },

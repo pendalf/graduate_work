@@ -13,6 +13,8 @@ import Formula from './modules/Formula';
 import repairTypes from './modules/repairTypes';
 import designSolutions from './modules/designSolutions';
 import scheme from './modules/scheme';
+import sendForm from './modules/sendForm';
+import maskPhone from './modules/maskPhone';
 
 
 'use strict';
@@ -27,7 +29,7 @@ import scheme from './modules/scheme';
     togglePopup([
         ['.link-list-menu a, .link-list-repair a', '.popup-repair-types'],
         ['.link-privacy', '.popup-privacy'],
-        ['.director button, .services button', '.popup-consultation']
+        ['.director button, .services > button', '.popup-consultation']
     ]);
 
     // accordeon
@@ -170,5 +172,48 @@ import scheme from './modules/scheme';
 
     // scheme
     scheme();
+
+    // send-ajax-form
+    maskPhone('.feedback-block__form-input_phone');
+    maskPhone('.feedback__form .feedback__input-input');
+    const feedbackForm = document.querySelectorAll('.feedback__form');
+    [...feedbackForm].forEach(i => {
+        sendForm(i, {
+            pattern: {
+                phone: /^\+7 \(\d\d\d\) \d\d\d-\d\d-\d\d$/,
+            },
+            method: {
+                '.feedback__input-input': [
+                    ['notEmpty'],
+                    ['pattern', 'phone']
+                ],
+                '.checkbox__input': [
+                    ['isChecked']
+                ]
+            }
+        });
+    });
+
+    const feedbackBlockForm = document.querySelectorAll('.feedback-block__form');
+    [...feedbackBlockForm].forEach(i => {
+        sendForm(i, {
+            pattern: {
+                phone: /^\+7 \(\d\d\d\) \d\d\d-\d\d-\d\d$/,
+            },
+            method: {
+                '.feedback-block__form-input_name': [
+                    ['notEmpty']
+                ],
+                '.feedback-block__form-input_phone': [
+                    ['notEmpty'],
+                    ['pattern', 'phone']
+                ],
+                '.checkbox__input': [
+                    ['isChecked']
+                ]
+            }
+        });
+    });
+    //
 
 })();

@@ -72,7 +72,9 @@ const togglePopup = els => {
                 (
                     target.closest('.close') ||
                     (!target.closest('.popup-dialog') &&
-                        !target.closest('.popup-dialog-transparency')
+                        !target.closest('.popup-dialog-transparency') &&
+                        !target.closest('.feedback-wrap')
+
                     )
                 ) &&
                 !target.closest('.popup-dialog-menu') &&

@@ -41,6 +41,7 @@ class Formula {
 
     mouseenterHandler(e) {
         const target = e.target;
+        console.log(target);
         if (!(target instanceof HTMLDocument) && target.closest(this.iconSelector)) {
             const el = target.closest(this.itemSelector),
                 popup = el.querySelector(this.popupSelector),
@@ -70,15 +71,7 @@ class Formula {
 
     handlers() {
 
-        this.main.addEventListener('mouseenter', e => {
-            if (!this.throttled) {
-                this.throttled = true;
-                this.mouseenterHandler(e);
-                setTimeout(() => {
-                    this.throttled = false;
-                }, 20);
-            }
-        }, true);
+        this.main.addEventListener('mouseenter', this.mouseenterHandler.bind(this), true);
         this.main.addEventListener('mouseleave', this.mouseleaveHandler.bind(this), true);
     }
 }
